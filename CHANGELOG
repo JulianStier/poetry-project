@@ -1,0 +1,4 @@
+# Changelog
+
+## 0.2
+- using importlib resources to find the actual referenced package pyproject.toml
