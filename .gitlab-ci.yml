@@ -1,0 +1,39 @@
+cache:
+  key: "poetry-project-${CI_JOB_NAME}"
+  paths:
+    - .cache/pip
+    - .venv
+
+stages:
+  - stage-quality
+  - stage-tests
+
+.install-deps-template: &install-deps
+  before_script:
+    - pip install poetry
+    - poetry --version
+    - poetry config virtualenvs.in-project true
+    - poetry install -vv
+
+.test-template: &test
+  <<: *install-deps
+  stage: stage-tests
+  script:
+    - poetry run pytest tests/
+
+# Test Jobs
+test-python3.5:
+  <<: *test
+  image: python:3.5
+
+test-python3.6:
+  <<: *test
+  image: python:3.6
+
+test-python3.7:
+  <<: *test
+  image: python:3.7
+
+test-python3.8:
+  <<: *test
+  image: python:3.8
