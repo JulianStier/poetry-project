@@ -1,8 +1,10 @@
+from importlib_resources import files
 from pathlib import Path
 import tomlkit
 
 
 def load_pyproject_toml(base_path, file_name='pyproject.toml'):
+    # Deprecated, as it uses a concrete base path and not a package
     d = Path(base_path)
 
     while d.parent != d:
@@ -14,9 +16,24 @@ def load_pyproject_toml(base_path, file_name='pyproject.toml'):
     return None
 
 
-def get_poetry_attribute(attribute_name, base_path=__file__, pyproject_toml=None):
+def load_toml_from_package(package, project_file_name='pyproject.toml'):
+    package_path = files(package)
+
+    while package_path.parent != package_path:
+        package_path = package_path.parent
+        possible_project_file_path = package_path.joinpath(project_file_name)
+        if possible_project_file_path.exists():
+            return tomlkit.parse(possible_project_file_path.read_text())
+
+    return None
+
+
+def get_poetry_attribute(attribute_name, package, pyproject_toml=None, project_file_name='pyproject.toml'):
     if pyproject_toml is None:
-        pyproject_toml = load_pyproject_toml(base_path)
+        pyproject_toml = load_toml_from_package(package, project_file_name)
+
+    if pyproject_toml is None:
+        return None
 
     if 'tool' not in pyproject_toml or 'poetry' not in pyproject_toml['tool']:
         return None
