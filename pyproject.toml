@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "poetry-project"
 version = "0.2.0"
-description = ""
+description = "Read poetry project information such as name, version and description."
 authors = ["Julian Stier <mail@julian-stier.de>"]
 
 [tool.poetry.dependencies]
