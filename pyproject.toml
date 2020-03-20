@@ -3,6 +3,10 @@ name = "poetry-project"
 version = "0.2.0"
 description = "Read poetry project information such as name, version and description."
 authors = ["Julian Stier <mail@julian-stier.de>"]
+include = [
+    "pyproject.toml",
+    "README.md"
+]
 
 [tool.poetry.dependencies]
 python = "^3.5"
