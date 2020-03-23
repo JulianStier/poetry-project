@@ -1,4 +1,8 @@
 # Changelog
 
+## 0.3
+- using importlib metadata if retrieving toml file fails
+- pyproject.toml actually needs to be shipped in a package if it should be accessed from a package
+
 ## 0.2
 - using importlib resources to find the actual referenced package pyproject.toml
