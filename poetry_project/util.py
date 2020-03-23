@@ -9,10 +9,10 @@ def load_toml_from_package(package, project_file_name='pyproject.toml'):
     package_path = files(package)
 
     while package_path.parent != package_path:
-        package_path = package_path.parent
         possible_project_file_path = package_path.joinpath(project_file_name)
         if possible_project_file_path.exists():
             return tomlkit.parse(possible_project_file_path.read_text())
+        package_path = package_path.parent
 
     raise ValueError('Could not find <{file}>-file in package <{package}>'.format(file=project_file_name, package=str(package)))
 

@@ -12,6 +12,7 @@ include = [
 python = "^3.5"
 tomlkit = "^0.5.11"
 importlib-resources = "^1.4.0"
+importlib-metadata = "^1.5.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.4.1"
