@@ -1,7 +1,13 @@
 # poetry-project
 Load pyproject.toml information into your project.
-
-From Pypi:
+If you want to centralize your version information of your package at e.g. your *pyproject.toml*, then you simply might want to use
+```python
+from importlib_metadata import version
+__version__ = version('pyklopp')
+```
+to load your package version.
+This actually accesses the installed package in your current environment and retrieves the metadata version from there.
+However, if you want to actually access content of your (probably not installed) *pyproject.toml*, you can use
 ``pip install poetry_project``
 
 Usage:
@@ -24,7 +30,8 @@ include = [
     "pyproject.toml"
 ]
 ```
-Only then gets this file actually packaged when delivered e.g. by PyPi.
+Only then this file gets actually packaged when delivered e.g. by PyPi.
+
 
 # Development
 
